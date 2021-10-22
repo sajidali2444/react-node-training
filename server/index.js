@@ -1,4 +1,5 @@
 const express = require('express')
+const config = require('./config')
 //const bodyParser = require('body-parser')
 const app = express()
 // parse requests of content-type: application/json
@@ -9,17 +10,16 @@ app.get('/', (request, response) => {
   console.log('hello node api')
 })
 //named path
-let students = []
-app.post('/create', (request, response) => {
-  const student = request.body
-  students.push(student)
-  response.status(200).send('created')
-  console.log('data receive => ', student)
-})
-app.get('/getstudents', (request, response) => {
-  response.status(200).send(students)
+app.use('/teacher', require('./routes/teacherRoutes'))
+app.use((er, req, res, next) => {
+  console.log(err.stack)
+  console.log(err.name)
+  console.log(err.code)
+  res.status(500).json({
+    message: 'Something went wrong',
+  })
 })
 
-app.listen(3001, () => {
-  console.log('Express is running on port 3001')
+app.listen(config.port || 3001, () => {
+  console.log(`Express is running on port ${config.port}`)
 })
