@@ -1,11 +1,11 @@
-import {Divider, Menu, MenuItem} from '@mui/material'
+import { Divider, Menu, MenuItem } from '@mui/material';
 
-import {Settings, Preferences, SignOut} from '../../Actions'
+import { Settings, Preferences, SignOut } from '../../Actions';
 
 interface DefaultMenuProps {
-  isMenuOpen: boolean
-  handleMenuClose: () => void
-  anchorEl: HTMLElement | null
+  isMenuOpen: boolean;
+  handleMenuClose: () => void;
+  anchorEl: HTMLElement | null;
 }
 
 export const DefaultMenu = ({
@@ -34,4 +34,4 @@ export const DefaultMenu = ({
       Sign Out
     </MenuItem>
   </Menu>
-)
+);

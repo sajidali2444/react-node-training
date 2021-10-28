@@ -9,11 +9,11 @@ import {
   SettingsOutlined as SettingsIcon,
   ListAlt as ListIcon,
   CreditCard as BillingIcon,
-} from '@mui/icons-material'
+} from '@mui/icons-material';
 
-import {Home} from '@/pages/Home'
+import { Home } from '@/pages/Home';
 
-import {Route} from '@/types/Route'
+import { Route } from '@/types/Route';
 
 const routes: Array<Route> = [
   {
@@ -102,6 +102,6 @@ const routes: Array<Route> = [
       },
     ],
   },
-]
+];
 
-export default routes
+export default routes;

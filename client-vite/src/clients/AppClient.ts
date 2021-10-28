@@ -1,9 +1,9 @@
-import {IAppContext} from '@/contexts/AppContext'
+import { IAppContext } from '@/contexts/AppContext';
 
-import {User} from '@/types/User'
+import { User } from '@/types/User';
 
 class AppClient implements IAppContext {
-  user: User
+  user: User;
 
   /**
    * Creates an instance of AppClient.
@@ -19,8 +19,8 @@ class AppClient implements IAppContext {
       isAdmin: true,
       isActive: true,
       isVerified: true,
-    }
+    };
   }
 }
 
-export default AppClient
+export default AppClient;

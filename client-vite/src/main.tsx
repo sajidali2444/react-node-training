@@ -1,8 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {Helmet} from 'react-helmet'
-import App from './App'
-import {APP_TITLE, APP_DESCRIPTION} from './utils/constants'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Helmet } from 'react-helmet';
+import App from './App';
+import { APP_TITLE, APP_DESCRIPTION } from './utils/constants';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,4 +18,4 @@ ReactDOM.render(
     <App />
   </React.StrictMode>,
   document.getElementById('root'),
-)
+);

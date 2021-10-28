@@ -1,14 +1,14 @@
-import {ComponentType} from 'react'
-import {Badge, Icon, useTheme} from '@mui/material'
-import {LIGHT_MODE_THEME} from '@/utils/constants'
+import { ComponentType } from 'react';
+import { Badge, Icon, useTheme } from '@mui/material';
+import { LIGHT_MODE_THEME } from '@/utils/constants';
 
 interface ActionIconProps {
-  badgeContent?: number
-  icon: ComponentType
+  badgeContent?: number;
+  icon: ComponentType;
 }
 
-export const ActionIcon = ({badgeContent, icon}: ActionIconProps) => {
-  const theme = useTheme()
+export const ActionIcon = ({ badgeContent, icon }: ActionIconProps) => {
+  const theme = useTheme();
   return badgeContent ? (
     <Badge
       badgeContent={badgeContent}
@@ -18,5 +18,5 @@ export const ActionIcon = ({badgeContent, icon}: ActionIconProps) => {
     </Badge>
   ) : (
     <Icon component={icon} />
-  )
-}
+  );
+};

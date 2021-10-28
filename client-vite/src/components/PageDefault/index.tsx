@@ -1,14 +1,14 @@
-import {Typography, Box} from '@mui/material'
-import {useLocation} from 'react-router'
+import { Typography, Box } from '@mui/material';
+import { useLocation } from 'react-router';
 
-import {PageTitle} from '../PageTitle'
+import { PageTitle } from '../PageTitle';
 
 export const PageDefault = () => {
-  const location = useLocation()
+  const location = useLocation();
   return (
     <>
       <PageTitle title={location.pathname.replaceAll('/', ' ').trimStart()} />
-      <Box sx={{p: 3}}>
+      <Box sx={{ p: 3 }}>
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
@@ -40,5 +40,5 @@ export const PageDefault = () => {
         </Typography>
       </Box>
     </>
-  )
-}
+  );
+};

@@ -4,4 +4,6 @@ export interface IThemeModeContext {
   toggleThemeMode: () => void;
 }
 
-export const ThemeModeContext = createContext<IThemeModeContext>({} as IThemeModeContext);
+export const ThemeModeContext = createContext<IThemeModeContext>(
+  {} as IThemeModeContext,
+);

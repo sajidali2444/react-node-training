@@ -1,28 +1,28 @@
-import {useState} from 'react'
-import {List, Divider, Collapse} from '@mui/material'
+import { useState } from 'react';
+import { List, Divider, Collapse } from '@mui/material';
 
-import {RouteItem} from './RouteItem'
-import {SignOutRoute} from './SignOutRoute'
+import { RouteItem } from './RouteItem';
+import { SignOutRoute } from './SignOutRoute';
 
-import {routes} from '@/config'
-import {Route} from '@/types'
+import { routes } from '@/config';
+import { Route } from '@/types';
 
 export const Routes = () => {
-  const [routesState, setRoutesStage] = useState<Route[]>(routes)
+  const [routesState, setRoutesStage] = useState<Route[]>(routes);
 
   const handleMenuClick = (route: Route) => {
     const items = routesState.map(item => {
       if (item.key === route.key) {
-        item.expanded = !item.expanded
+        item.expanded = !item.expanded;
       }
-      return item
-    })
-    setRoutesStage(items)
-  }
+      return item;
+    });
+    setRoutesStage(items);
+  };
 
   return (
     <>
-      <List component="nav" sx={{height: '100%'}}>
+      <List component="nav" sx={{ height: '100%' }}>
         {routesState.map((route: Route) => (
           <>
             {route.subRoutes ? (
@@ -50,5 +50,5 @@ export const Routes = () => {
       </List>
       <SignOutRoute />
     </>
-  )
-}
+  );
+};

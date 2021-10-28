@@ -1,14 +1,14 @@
-import React, {ComponentType} from 'react'
-import {IconButton, Tooltip} from '@mui/material'
+import React, { ComponentType } from 'react';
+import { IconButton, Tooltip } from '@mui/material';
 
-import {ActionIcon} from '../ActionIcon'
+import { ActionIcon } from '../ActionIcon';
 
 interface ActionItemProps {
-  title: string
-  icon: ComponentType
-  onClick?: (event: React.MouseEvent<HTMLElement>) => void
-  badgeContent?: number
-  disableTooltip?: boolean
+  title: string;
+  icon: ComponentType;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+  badgeContent?: number;
+  disableTooltip?: boolean;
 }
 
 export const ActionItem = ({
@@ -22,7 +22,7 @@ export const ActionItem = ({
     <IconButton size="large" color="inherit" onClick={onClick}>
       <ActionIcon badgeContent={badgeContent} icon={icon} />
     </IconButton>
-  )
+  );
 
   return disableTooltip ? (
     buttonIcon
@@ -30,5 +30,5 @@ export const ActionItem = ({
     <Tooltip title={title} placement="bottom" arrow>
       {buttonIcon}
     </Tooltip>
-  )
-}
+  );
+};

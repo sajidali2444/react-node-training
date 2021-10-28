@@ -1,15 +1,15 @@
-import React, {useContext} from 'react'
-import {Box, Menu, MenuItem} from '@mui/material'
+import React, { useContext } from 'react';
+import { Box, Menu, MenuItem } from '@mui/material';
 
-import {Messages, Notifications, SignOut, Settings} from '../../Actions'
-import {ThemeSwitcher} from '../ThemeSwitcher'
-import {ThemeModeContext} from '@/contexts'
+import { Messages, Notifications, SignOut, Settings } from '../../Actions';
+import { ThemeSwitcher } from '../ThemeSwitcher';
+import { ThemeModeContext } from '@/contexts';
 
 interface MobileMenuProps {
-  isMenuOpen: boolean
-  handleMenuOpen: (event: React.MouseEvent<HTMLElement>) => void
-  handleMenuClose: () => void
-  anchorEl: HTMLElement | null
+  isMenuOpen: boolean;
+  handleMenuOpen: (event: React.MouseEvent<HTMLElement>) => void;
+  handleMenuClose: () => void;
+  anchorEl: HTMLElement | null;
 }
 
 export const MobileMenu = ({
@@ -18,7 +18,7 @@ export const MobileMenu = ({
   handleMenuClose,
   anchorEl,
 }: MobileMenuProps) => {
-  const {toggleThemeMode} = useContext(ThemeModeContext)
+  const { toggleThemeMode } = useContext(ThemeModeContext);
 
   return (
     <Menu
@@ -36,7 +36,7 @@ export const MobileMenu = ({
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <Box sx={{textAlign: 'center'}}>
+      <Box sx={{ textAlign: 'center' }}>
         <MenuItem onClick={toggleThemeMode}>
           <ThemeSwitcher disableTooltip />
           Toggle Theme
@@ -59,5 +59,5 @@ export const MobileMenu = ({
         </MenuItem>
       </Box>
     </Menu>
-  )
-}
+  );
+};

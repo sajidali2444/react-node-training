@@ -1,4 +1,10 @@
-import { ListItemButton, ListItemIcon, ListItemText, IconButton, styled } from '@mui/material';
+import {
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+  styled,
+} from '@mui/material';
 import ExitToApp from '@mui/icons-material/ExitToApp';
 
 export const SignOutRoute = () => {
