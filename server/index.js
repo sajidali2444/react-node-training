@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql');
+const db = require('./db');
 var cors = require('cors');
 const config = require('./config');
 const app = express();
@@ -8,39 +8,25 @@ app.use(cors());
 // parse requests of content-type: application/json
 app.use(express.json());
 
-// configure db
-const mysqlDB = mysql.createConnection({
-  host: config.dbHost,
-  user: config.dbUser,
-  password: config.dbPassword,
-  database: config.dbName,
-});
-//mysqlDB.end();
-//mysqlDB.destroy();
-// open the MySQL connection
-mysqlDB.connect(error => {
-  if (error) {
-    console.log(error);
-    throw error;
-  }
-  console.log('Successfully connected to the database.');
-});
 //root path
 app.get('/', (request, response) => {
   response.send('api root/entry path');
   console.log('hello node api');
 });
 
-app.get('/actors', (request, response) => {
-  mysqlDB.query('SELECT * FROM actor', (error, dbResult) => {
-    // console.log(result);
-    response.send(dbResult);
-    mysqlDB.end();
-  });
+app.get('/actors', async (request, response) => {
+  let result = await db.execute('SELECT * FROM actor');
+  console.log(result);
+  return response.json(result[0]);
+});
+app.get('/actors/:id', async (request, response) => {
+  const { id } = request.params;
+  let result = await db.execute(`SELECT * FROM actor WHERE actor_id = ${id}`);
+  return response.json(result[0]);
 });
 //named path
 app.use('/teacher', require('./routes/teacherRoutes'));
-app.use((er, req, res, next) => {
+app.use((err, req, res, next) => {
   console.log(err.stack);
   console.log(err.name);
   console.log(err.code);
