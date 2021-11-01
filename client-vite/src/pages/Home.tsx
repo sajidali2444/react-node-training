@@ -9,7 +9,12 @@ import { APP_TITLE, PAGE_TITLE_HOME } from '@/utils/constants';
 
 export const Home = () => {
   const context = useContext(AppContext);
-
+  let value = 1;
+  //ternary operator
+  // conditon ? value1 : value2
+  const showLogog = () => {
+    return value && <StyledLogo src={logo} alt="logo" />;
+  };
   return (
     <>
       <Helmet>
@@ -18,9 +23,7 @@ export const Home = () => {
         </title>
       </Helmet>
       <Typography variant="h4">{`Hello, ${context.user.name} 🎃`}</Typography>
-      <LogoWrapper>
-        <StyledLogo src={logo} alt="logo" />
-      </LogoWrapper>
+      <LogoWrapper>{showLogog()}</LogoWrapper>
     </>
   );
 };
