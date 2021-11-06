@@ -50,7 +50,7 @@ app.get('/customers', async (request, response) => {
 	from customer c
 join address a on a.address_id = c.address_id
 join city cc on cc.city_id = a.city_id
-join country cu on cu.country_id = cc.country_id where active = true limit 100`);
+join country cu on cu.country_id = cc.country_id where active = true `);
 
   const customers = response.json(queryResult[0]);
   return customers;
@@ -62,6 +62,15 @@ app.patch('/customers', async (req, res) => {
   const { id, status } = req.body;
   const query = await db.execute(
     `update customer set active = ${status} where customer_id = ${id}`,
+  );
+  return res.json({ result: true });
+});
+
+app.post('/customers', (req, res) => {
+  const { first_name, last_name, email } = req.body;
+  const result = db.execute(
+    'insert into customer(store_id,first_name,last_name,email,address_id,active,create_date) VALUES(1, ?, ?,?,1,1,now())',
+    [first_name, last_name, email],
   );
   return res.json({ result: true });
 });
