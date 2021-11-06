@@ -4,85 +4,85 @@ import {
   FormGroup,
   Input,
   InputLabel,
-} from "@mui/material";
-import React from "react";
+} from '@mui/material';
+import React from 'react';
 
 const Card1 = () => {
   //=============================================
   const dataToBeSend = {
-    name: "",
-    username: "",
-    email: "",
-    phone: "",
-    id: "",
+    first_name: '',
+    last_name: '',
+    email: '',
   };
   //=============================================
-  const [data, setData] = React.useState(dataToBeSend);
+  const [firstName, setFirstName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
+  const [email, setEmail] = React.useState('');
   //=============================================
-  const inputGetter = (item) => {
-    setData({ ...data, [item.target.name]: item.target.value });
-    console.log(data);
-  };
+
   //=============================================
-  const sendData = async (data) => {
-    const response = await fetch(`/formdata`, data);
+  const sendData = async data => {
+    const formData = { first_name: firstName, last_name: lastName, email };
+    console.log(formData);
+    const response = await fetch('http://localhost:3001/customers', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(formData),
+    });
+    //const response = await fetch(`/formdata`, data);
     //use proxy in package.json or intall npm package of http-prosy-middlware
   };
   //=============================================
   return (
     <div
       style={{
-        width: "78.vw",
-        height: "100%",
-        paddingTop: "2rem",
-        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.2)",
-        backdropFilter: "blur(2px)",
-        WebkitBackdropFilter: "blur(18px)",
-        display: "flex",
-        paddingLeft: "2%",
-        background: "-webkit-linear-gradient(to right, #00D4FF, #00FFAA)",
-        background: "linear-gradient(to right, #00D4FF, #00FFAA)",
+        width: '78.vw',
+        height: '100%',
+        paddingTop: '2rem',
+        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.2)',
+        backdropFilter: 'blur(2px)',
+        WebkitBackdropFilter: 'blur(18px)',
+        display: 'flex',
+        paddingLeft: '2%',
+        background: '-webkit-linear-gradient(to right, #00D4FF, #00FFAA)',
+        background: 'linear-gradient(to right, #00D4FF, #00FFAA)',
       }}
     >
-      <FormGroup style={{ width: "40rem" }}>
+      <FormGroup style={{ width: '40rem' }}>
         <FormControl>
-          <InputLabel>Name</InputLabel>
-          <Input onChange={(item) => inputGetter(item)} name="name"></Input>
+          <InputLabel>First Name</InputLabel>
+          <Input
+            onChange={item => setFirstName(item.target.value)}
+            name="first_name"
+          ></Input>
         </FormControl>
-        <br />
         <FormControl>
-          <InputLabel>Username</InputLabel>
-          <Input onChange={(item) => inputGetter(item)} name="username"></Input>
+          <InputLabel>Last Name</InputLabel>
+          <Input
+            onChange={item => setLastName(item.target.value)}
+            name="last_name"
+          ></Input>
         </FormControl>
         <br />
         <FormControl>
           <InputLabel>Email</InputLabel>
-          <Input onChange={(item) => inputGetter(item)} name="email"></Input>
+          <Input
+            onChange={item => setEmail(item.target.value)}
+            name="email"
+          ></Input>
         </FormControl>
-        <br />
-        <FormControl>
-          <InputLabel>Phone</InputLabel>
-          <Input onChange={(item) => inputGetter(item)} name="phone"></Input>
-        </FormControl>
-        <br />
-        <FormControl>
-          <InputLabel>ID</InputLabel>
-          <Input onChange={(item) => inputGetter(item)} name="id"></Input>
-        </FormControl>
-        <br />
       </FormGroup>
       <Button
         style={{
-          position: "relative",
-          top: "267px",
-          left: "44px",
-          height: "3rem",
-          background: "black",
-          color: "white",
+          position: 'relative',
+          background: 'black',
+          color: 'white',
         }}
         onClick={() => sendData()}
       >
-        Click to enter data
+        Save
       </Button>
     </div>
   );
