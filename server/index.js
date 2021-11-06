@@ -35,6 +35,38 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.get('/customers', async (request, response) => {
+  const queryResult = await db.execute(`select
+	c.customer_id,
+  c.first_name,
+  c.last_name,
+	c.email,
+	a.address,
+	cu.country_id,
+	cu.country,
+	cc.city_id,
+	cc.city,
+  c.active
+	from customer c
+join address a on a.address_id = c.address_id
+join city cc on cc.city_id = a.city_id
+join country cu on cu.country_id = cc.country_id where active = true limit 100`);
+
+  const customers = response.json(queryResult[0]);
+  return customers;
+});
+//data will in body for POST/PATCH/PUT
+// for GET data will be in params object
+app.patch('/customers', async (req, res) => {
+  //const { id, status } = req.params;
+  const { id, status } = req.body;
+  const query = await db.execute(
+    `update customer set active = ${status} where customer_id = ${id}`,
+  );
+  return res.json({ result: true });
+});
+
 app.listen(config.port || 3001, () => {
   console.log(`Express is running on port ${config.port}`);
 });
+//asfasdfasdfasdfasd

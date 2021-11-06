@@ -1,14 +1,14 @@
-require('dotenv').config({path: '../.env'})
+require('dotenv').config();
 const getEnvironmentVariable = environmentVariable => {
-  const environmentVariableValue = process.env[environmentVariable]
+  const environmentVariableValue = process.env[environmentVariable];
   if (!environmentVariableValue) {
     throw new Error(
       `Couldn't find environment variable: ${environmentVariableValue}`,
-    )
+    );
   } else {
-    return environmentVariableValue
+    return environmentVariableValue;
   }
-}
+};
 
 const config = {
   //apiKey: getEnvironmentVariable('API_KEY'),
@@ -18,5 +18,5 @@ const config = {
   dbPort: getEnvironmentVariable('db_port'),
   dbUser: getEnvironmentVariable('db_user'),
   dbPassword: getEnvironmentVariable('db_password'),
-}
-module.exports = config
+};
+module.exports = config;
