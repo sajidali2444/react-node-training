@@ -20,7 +20,7 @@ app.get('/actors', async (request, response) => {
   return response.json(result[0]);
 });
 app.get('/actors/:id', async (request, response) => {
-  const { id } = request.params;
+  const { id } = request.params; //{id:1,name:'sajid',cell:4454,phone:234234}
   let result = await db.execute(`SELECT * FROM actor WHERE actor_id = ${id}`);
   return response.json(result[0]);
 });
@@ -55,24 +55,44 @@ join country cu on cu.country_id = cc.country_id where active = true `);
   const customers = response.json(queryResult[0]);
   return customers;
 });
+app.get('/customers/delete/:id', async (request, response) => {
+  console.log('delete=>', request.params);
+  //const queryResult = await db.execute(``);
+  //const customers = response.json(queryResult[0]);
+  //return customers;
+});
 //data will in body for POST/PATCH/PUT
 // for GET data will be in params object
 app.patch('/customers', async (req, res) => {
   //const { id, status } = req.params;
-  const { id, status } = req.body;
+  const { id, status } = req.body; //[],{},value
   const query = await db.execute(
     `update customer set active = ${status} where customer_id = ${id}`,
   );
   return res.json({ result: true });
 });
 
-app.post('/customers', (req, res) => {
+app.post('/customers', async (req, res) => {
+  console.log(req.body);
+
   const { first_name, last_name, email } = req.body;
-  const result = db.execute(
+  let query = `insert into customer(store_id,first_name,last_name,email,address_id,active,create_date) VALUES(1, ${first_name}, ${last_name},${email},1,1,now())`;
+  const result = await db.execute(query);
+  /*
+  const result = await db.execute(
     'insert into customer(store_id,first_name,last_name,email,address_id,active,create_date) VALUES(1, ?, ?,?,1,1,now())',
     [first_name, last_name, email],
   );
+  */
   return res.json({ result: true });
+});
+
+app.get('/customers/:id', async (req, res) => {
+  const { id } = req.params;
+  const result = await db.execute(
+    `SELECT * FROM customer WHERE customer_id = ${id}`,
+  );
+  return res.json(result[0]);
 });
 
 app.listen(config.port || 3001, () => {

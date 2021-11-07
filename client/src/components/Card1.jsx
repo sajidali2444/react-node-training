@@ -27,7 +27,7 @@ const Card1 = () => {
     const response = await fetch('http://localhost:3001/customers', {
       method: 'post',
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
     });
