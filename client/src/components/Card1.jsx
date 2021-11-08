@@ -92,11 +92,20 @@ const Card1 = () => {
           color: "white",
         }}
         onClick={() => {
-          if (firstName && lastName && email.indexOf("@") > 0) {
+          if (
+            firstName &&
+            lastName &&
+            email.indexOf("@") > 0 &&
+            email.indexOf(".com") > 0
+          ) {
             sendData();
             clearInputFeilds();
           }
-          if (email == "" || email.indexOf("@") < 0) {
+          if (
+            email == "" ||
+            email.indexOf("@") < 0 ||
+            email.indexOf(".com") < 0
+          ) {
             window.alert("Fill email properly");
           }
           if (lastName == "") {
