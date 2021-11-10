@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Route, Switch, NavLink } from 'react-router-dom';
 
-export default function ButtonAppBar() {
+export default function Menu() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -40,20 +40,20 @@ export default function ButtonAppBar() {
           </Button>
           <Button color="inherit" style={{ flexGrow: '0.6' }}>
             <NavLink
-              to="/add-user"
+              to="/customer"
               style={{ textDecoration: 'none', color: 'white' }}
               activeClassName="colorlink"
             >
-              Add new user
+              Add new
             </NavLink>
           </Button>
           <Button color="inherit" style={{ flexGrow: '0.6' }}>
             <NavLink
-              to="/all-users"
+              to="/customers"
               style={{ textDecoration: 'none', color: 'white' }}
               activeClassName="colorlink"
             >
-              All users
+              Customers
             </NavLink>
           </Button>
         </Toolbar>

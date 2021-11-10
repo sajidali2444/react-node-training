@@ -1,16 +1,18 @@
 import React from 'react';
 import Card from './Card';
 import { Route, Switch, NavLink } from 'react-router-dom';
-import Card1 from './Card1';
-import Card2 from './Card2';
+import Customer from './Customer';
+import Customers from './Customers';
+import EditCustomer from './EditCustomer';
 
 const Maincontent = () => {
   return (
     <div>
       <Switch>
         <Route path="/" exact component={Card} />
-        <Route path="/add-user" exact component={Card1} />
-        <Route path="/all-users" exact component={Card2} />
+        <Route path="/customer" exact component={Customer} />
+        <Route path="/customers" exact component={Customers} />
+        <Route path="/customers/:id" exact component={EditCustomer} />
       </Switch>
     </div>
   );
