@@ -42,7 +42,11 @@ const Card1 = () => {
     setEmail("");
   };
   //=============================================
-  console.log(email.indexOf("@"));
+  function validateEmail(email) {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
   return (
     <div
       style={{
@@ -92,20 +96,11 @@ const Card1 = () => {
           color: "white",
         }}
         onClick={() => {
-          if (
-            firstName &&
-            lastName &&
-            email.indexOf("@") > 0 &&
-            email.indexOf(".com") > 0
-          ) {
+          if (firstName && lastName && validateEmail(email)) {
             sendData();
             clearInputFeilds();
           }
-          if (
-            email == "" ||
-            email.indexOf("@") < 0 ||
-            email.indexOf(".com") < 0
-          ) {
+          if (email == "" || !validateEmail(email)) {
             window.alert("Fill email properly");
           }
           if (lastName == "") {
