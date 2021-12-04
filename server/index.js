@@ -2,12 +2,16 @@ const express = require('express');
 const db = require('./db');
 var cors = require('cors');
 const config = require('./config');
+const teacherRoutes = require('./routes/teacherRoutes');
+const customerRoutes = require('./routes/customerRoutes');
 const app = express();
 app.use(cors());
 
 // parse requests of content-type: application/json
 app.use(express.json());
-
+app.use(teacherRoutes);
+app.use(customerRoutes);
+/*
 //root path
 app.get('/', (request, response) => {
   response.send('api root/entry path');
@@ -78,12 +82,12 @@ app.post('/customers', async (req, res) => {
   const { first_name, last_name, email } = req.body;
   let query = `insert into customer(store_id,first_name,last_name,email,address_id,active,create_date) VALUES(1, '${first_name}', '${last_name}','${email}',1,1,now())`;
   const result = await db.execute(query);
-  /*
-  const result = await db.execute(
-    'insert into customer(store_id,first_name,last_name,email,address_id,active,create_date) VALUES(1, ?, ?,?,1,1,now())',
-    [first_name, last_name, email],
-  );
-  */
+
+  // const result = await db.execute(
+  //   'insert into customer(store_id,first_name,last_name,email,address_id,active,create_date) VALUES(1, ?, ?,?,1,1,now())',
+  //   [first_name, last_name, email],
+  // );
+
   return res.json({ result: true });
 });
 
@@ -94,7 +98,7 @@ app.get('/customers/:id', async (req, res) => {
   );
   return res.json(result[0]);
 });
-
+*/
 app.listen(config.port || 3001, () => {
   console.log(`Express is running on port ${config.port}`);
 });

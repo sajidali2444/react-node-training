@@ -19,6 +19,11 @@ const Customer = () => {
     email: '',
   };
   //=============================================
+  // useState function
+  //1. it takes initial state
+  //2. it will return initial state value in state variable
+  //3. it will return state function that will use to update state variable
+  //4. when state update then useState will trigger react rendring process.
   const [firstName, setFirstName] = React.useState('');
   const [lastName, setLastName] = React.useState('');
   const [email, setEmail] = React.useState('');
