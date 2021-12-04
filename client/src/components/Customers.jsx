@@ -1,65 +1,66 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import DoneIcon from '@mui/icons-material/Done';
-import CloseIcon from '@mui/icons-material/Close';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { styled } from '@mui/material/styles';
-import EditIcon from '@mui/icons-material/Edit';
-import { NavLink } from 'react-router-dom';
-import EditCustomer from './EditCustomer';
-const IOSSwitch = styled(props => (
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import DoneIcon from "@mui/icons-material/Done";
+import CloseIcon from "@mui/icons-material/Close";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { styled } from "@mui/material/styles";
+import EditIcon from "@mui/icons-material/Edit";
+import { NavLink } from "react-router-dom";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditCustomer from "./EditCustomer";
+const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
   width: 42,
   height: 26,
   padding: 0,
-  '& .MuiSwitch-switchBase': {
+  "& .MuiSwitch-switchBase": {
     padding: 0,
     margin: 2,
-    transitionDuration: '300ms',
-    '&.Mui-checked': {
-      transform: 'translateX(16px)',
-      color: '#fff',
-      '& + .MuiSwitch-track': {
-        backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
+    transitionDuration: "300ms",
+    "&.Mui-checked": {
+      transform: "translateX(16px)",
+      color: "#fff",
+      "& + .MuiSwitch-track": {
+        backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#65C466",
         opacity: 1,
         border: 0,
       },
-      '&.Mui-disabled + .MuiSwitch-track': {
+      "&.Mui-disabled + .MuiSwitch-track": {
         opacity: 0.5,
       },
     },
-    '&.Mui-focusVisible .MuiSwitch-thumb': {
-      color: '#33cf4d',
-      border: '6px solid #fff',
+    "&.Mui-focusVisible .MuiSwitch-thumb": {
+      color: "#33cf4d",
+      border: "6px solid #fff",
     },
-    '&.Mui-disabled .MuiSwitch-thumb': {
+    "&.Mui-disabled .MuiSwitch-thumb": {
       color:
-        theme.palette.mode === 'light'
+        theme.palette.mode === "light"
           ? theme.palette.grey[100]
           : theme.palette.grey[600],
     },
-    '&.Mui-disabled + .MuiSwitch-track': {
-      opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+    "&.Mui-disabled + .MuiSwitch-track": {
+      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
     },
   },
-  '& .MuiSwitch-thumb': {
-    boxSizing: 'border-box',
+  "& .MuiSwitch-thumb": {
+    boxSizing: "border-box",
     width: 22,
     height: 22,
   },
-  '& .MuiSwitch-track': {
+  "& .MuiSwitch-track": {
     borderRadius: 26 / 2,
-    backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
     opacity: 1,
-    transition: theme.transitions.create(['background-color'], {
+    transition: theme.transitions.create(["background-color"], {
       duration: 500,
     }),
   },
@@ -80,14 +81,36 @@ export default function Customers() {
     fetchData();
   }, []);
   //=======================================================================================================
+  const deleteCustomer = async (event, custotermData) => {
+    console.log("delete", custotermData.customer_id);
+    const result = await fetch(`http://localhost:3001/customers/delete`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify({
+        id: custotermData.customer_id,
+      }),
+    });
 
-  console.log('custoemr data => ', customers);
+    //`http://localhost:3001/customers/${custotermData.customer_id}/${currentStatus}`,
+    if (result && result.ok) {
+      const activeCustomers = customers.filter(
+        (item) => item.customer_id !== custotermData.customer_id
+      );
+      console.log("final result => ", activeCustomers);
+      setCustomers(activeCustomers);
+    }
+  };
+  //=======================================================================================================
+
+  console.log("custoemr data => ", customers);
   const setCustomerStatus = async (event, custotermData) => {
     const currentStatus = event.target.checked;
     const result = await fetch(`http://localhost:3001/customers`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
+        "Content-Type": "application/json; charset=UTF-8",
       },
       body: JSON.stringify({
         id: custotermData.customer_id,
@@ -98,9 +121,9 @@ export default function Customers() {
     //`http://localhost:3001/customers/${custotermData.customer_id}/${currentStatus}`,
     if (result && result.ok) {
       const activeCustomers = customers.filter(
-        item => item.customer_id !== custotermData.customer_id,
+        (item) => item.customer_id !== custotermData.customer_id
       );
-      console.log('final result => ', activeCustomers);
+      console.log("final result => ", activeCustomers);
       setCustomers(activeCustomers);
     }
   };
@@ -113,91 +136,102 @@ export default function Customers() {
       <TableContainer
         component={Paper}
         style={{
-          width: '100%',
-          height: '100%',
-          paddingTop: '2rem',
-          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.2)',
-          backdropFilter: 'blur(2px)',
-          WebkitBackdropFilter: 'blur(18px)',
-          display: 'flex',
-          justifyContent: 'center',
-          background: '-webkit-linear-gradient(to right, #00D4FF, #00FFAA)',
-          background: 'linear-gradient(to right, #00D4FF, #00FFAA)',
+          width: "100%",
+          height: "100%",
+          paddingTop: "2rem",
+          boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.2)",
+          backdropFilter: "blur(2px)",
+          WebkitBackdropFilter: "blur(18px)",
+          display: "flex",
+          justifyContent: "center",
+          background: "-webkit-linear-gradient(to right, #00D4FF, #00FFAA)",
+          background: "linear-gradient(to right, #00D4FF, #00FFAA)",
         }}
       >
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="right" style={{ textAlign: 'center' }}>
+              <TableCell align="right" style={{ textAlign: "center" }}>
                 First Name
               </TableCell>
-              <TableCell align="right" style={{ textAlign: 'center' }}>
+              <TableCell align="right" style={{ textAlign: "center" }}>
                 Last Name
               </TableCell>
-              <TableCell align="right" style={{ textAlign: 'center' }}>
+              <TableCell align="right" style={{ textAlign: "center" }}>
                 Email
               </TableCell>
-              <TableCell align="right" style={{ textAlign: 'center' }}>
+              <TableCell align="right" style={{ textAlign: "center" }}>
                 Country
               </TableCell>
-              <TableCell align="right" style={{ textAlign: 'center' }}>
+              <TableCell align="right" style={{ textAlign: "center" }}>
                 City
               </TableCell>
-              <TableCell align="right" style={{ textAlign: 'center' }}>
+              <TableCell align="right" style={{ textAlign: "center" }}>
                 Is active
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {customers?.map(cust => (
+            {customers?.map((cust) => (
               <TableRow key={cust.customer_id}>
-                <TableCell align="right" style={{ textAlign: 'center' }}>
+                <TableCell align="right" style={{ textAlign: "center" }}>
                   {cust.first_name}
                 </TableCell>
-                <TableCell align="right" style={{ textAlign: 'center' }}>
+                <TableCell align="right" style={{ textAlign: "center" }}>
                   {cust.last_name}
                 </TableCell>
-                <TableCell align="right" style={{ textAlign: 'center' }}>
+                <TableCell align="right" style={{ textAlign: "center" }}>
                   {cust.email}
                 </TableCell>
-                <TableCell align="right" style={{ textAlign: 'center' }}>
+                <TableCell align="right" style={{ textAlign: "center" }}>
                   {cust.country}
                 </TableCell>
                 <TableCell
                   component="th"
                   scope="row"
-                  style={{ textAlign: 'center' }}
+                  style={{ textAlign: "center" }}
                 >
                   {cust.city}
                 </TableCell>
                 <TableCell
                   component="th"
                   scope="row"
-                  style={{ textAlign: 'center' }}
+                  style={{ textAlign: "center" }}
                 >
                   <FormControlLabel
                     control={
                       <IOSSwitch sx={{ m: 1 }} defaultChecked={cust.active} />
                     }
-                    onChange={event => setCustomerStatus(event, cust)}
+                    onChange={(event) => setCustomerStatus(event, cust)}
                     label=""
                   />
-                </TableCell>{' '}
+                </TableCell>{" "}
                 <TableCell
                   component="th"
                   scope="row"
-                  style={{ textAlign: 'center' }}
+                  style={{ textAlign: "center" }}
                 >
                   <FormControlLabel
                     control={
                       <NavLink
                         to={`/customers/${cust.customer_id}`}
-                        style={{ textDecoration: 'none', color: 'white' }}
+                        style={{ textDecoration: "none", color: "white" }}
                         activeClassName="colorlink"
                       >
                         <EditIcon />
                       </NavLink>
                     }
+                    label=""
+                  />
+                </TableCell>
+                <TableCell
+                  component="th"
+                  scope="row"
+                  style={{ textAlign: "center" }}
+                >
+                  <FormControlLabel
+                    control={<DeleteIcon />}
+                    onClick={(event) => deleteCustomer(event, cust)}
                     label=""
                   />
                 </TableCell>
