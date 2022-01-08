@@ -1,15 +1,20 @@
-import * as React from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import Toolbar from '@mui/material/Toolbar';
+import * as React from 'react';
+import { NavLink } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 export default function Menu() {
+  const {
+    userDetail: { name },
+  } = React.useContext(UserContext);
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <h1>Name: {name}</h1>
       <AppBar
         position="static"
         style={{
@@ -38,24 +43,31 @@ export default function Menu() {
               Home
             </NavLink>
           </Button>
-          <Button color="inherit" style={{ flexGrow: '0.6' }}>
-            <NavLink
-              to="/customer"
-              style={{ textDecoration: 'none', color: 'white' }}
-              activeClassName="colorlink"
-            >
-              Add new
-            </NavLink>
-          </Button>
-          <Button color="inherit" style={{ flexGrow: '0.6' }}>
-            <NavLink
-              to="/customers"
-              style={{ textDecoration: 'none', color: 'white' }}
-              activeClassName="colorlink"
-            >
-              Customers
-            </NavLink>
-          </Button>
+
+          {
+            /*Object.keys(userDetail).length !== 0*/ name && (
+              <>
+                <Button color="inherit" style={{ flexGrow: '0.6' }}>
+                  <NavLink
+                    to="/customer"
+                    style={{ textDecoration: 'none', color: 'white' }}
+                    activeClassName="colorlink"
+                  >
+                    Add new
+                  </NavLink>
+                </Button>
+                <Button color="inherit" style={{ flexGrow: '0.6' }}>
+                  <NavLink
+                    to="/customers"
+                    style={{ textDecoration: 'none', color: 'white' }}
+                    activeClassName="colorlink"
+                  >
+                    Customers
+                  </NavLink>
+                </Button>
+              </>
+            )
+          }
         </Toolbar>
       </AppBar>
     </Box>

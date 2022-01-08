@@ -1,6 +1,7 @@
 import './App.css';
-import Menu from './components/Menu';
 import Maincontent from './components/Maincontent';
+import Menu from './components/Menu';
+import { CustomProvider } from './UserContext';
 
 function App() {
   return (
@@ -15,8 +16,10 @@ function App() {
         background: 'linear-gradient(to right, #ff6a00, #ee0979)',
       }}
     >
-      <Menu></Menu>
-      <Maincontent></Maincontent>
+      <CustomProvider>
+        <Menu></Menu>
+        <Maincontent></Maincontent>
+      </CustomProvider>
     </div>
   );
 }
