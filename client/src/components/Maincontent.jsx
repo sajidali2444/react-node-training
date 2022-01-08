@@ -1,9 +1,10 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { UserContext } from '../UserContext';
-import Customers from './Customers';
-import EditCustomer from './EditCustomer';
+import React from "react";
+import { Route, Switch, useHistory } from "react-router-dom";
+import { UserContext } from "../UserContext";
+import Customers from "./Customers";
+import EditCustomer from "./EditCustomer";
 const Maincontent = () => {
+  const history = useHistory();
   const {
     userDetail: { name },
     setUserDetail,
@@ -12,7 +13,14 @@ const Maincontent = () => {
   return (
     <div>
       <h1>Name: {name}</h1>
-      <button onClick={() => setUserDetail({})}>Logout</button>
+      <button
+        onClick={() => {
+          setUserDetail({});
+          history.push("/");
+        }}
+      >
+        Logout
+      </button>
       <Switch>
         <Route path="/" exact>
           <h1>Page 1</h1>

@@ -1,12 +1,12 @@
-import MenuIcon from '@mui/icons-material/Menu';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Toolbar from '@mui/material/Toolbar';
-import * as React from 'react';
-import { NavLink } from 'react-router-dom';
-import { UserContext } from '../UserContext';
+import MenuIcon from "@mui/icons-material/Menu";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import * as React from "react";
+import { NavLink } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
 export default function Menu() {
   const {
@@ -14,14 +14,13 @@ export default function Menu() {
   } = React.useContext(UserContext);
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <h1>Name: {name}</h1>
       <AppBar
         position="static"
         style={{
-          background: 'rgba(255, 255, 255, 0.2)',
-          backdropFilter: 'blur(18px)',
+          background: "rgba(255, 255, 255, 0.2)",
+          backdropFilter: "blur(18px)",
           boxShadow:
-            'rgba(0,0,0,0.2) 0px 12px 28px 0px, rgba(0,0,0,0.1) 0px 2px 4px 0px,rgba(255,255,255,0.5) 0px 0px 0px 1px',
+            "rgba(0,0,0,0.2) 0px 12px 28px 0px, rgba(0,0,0,0.1) 0px 2px 4px 0px,rgba(255,255,255,0.5) 0px 0px 0px 1px",
         }}
       >
         <Toolbar>
@@ -34,10 +33,10 @@ export default function Menu() {
           >
             <MenuIcon />
           </IconButton>
-          <Button color="inherit" style={{ flexGrow: '0.6' }}>
+          <Button color="inherit" style={{ flexGrow: "0.6" }}>
             <NavLink
               to="/"
-              style={{ textDecoration: 'none', color: 'white' }}
+              style={{ textDecoration: "none", color: "white" }}
               activeClassName="colorlink"
             >
               Home
@@ -47,19 +46,19 @@ export default function Menu() {
           {
             /*Object.keys(userDetail).length !== 0*/ name && (
               <>
-                <Button color="inherit" style={{ flexGrow: '0.6' }}>
+                <Button color="inherit" style={{ flexGrow: "0.6" }}>
                   <NavLink
                     to="/customer"
-                    style={{ textDecoration: 'none', color: 'white' }}
+                    style={{ textDecoration: "none", color: "white" }}
                     activeClassName="colorlink"
                   >
                     Add new
                   </NavLink>
                 </Button>
-                <Button color="inherit" style={{ flexGrow: '0.6' }}>
+                <Button color="inherit" style={{ flexGrow: "0.6" }}>
                   <NavLink
                     to="/customers"
-                    style={{ textDecoration: 'none', color: 'white' }}
+                    style={{ textDecoration: "none", color: "white" }}
                     activeClassName="colorlink"
                   >
                     Customers
@@ -68,6 +67,15 @@ export default function Menu() {
               </>
             )
           }
+          <Button color="inherit" style={{ flexGrow: "0.6" }}>
+            <NavLink
+              to="/customers"
+              style={{ textDecoration: "none", color: "white" }}
+              activeClassName="colorlink"
+            >
+              Name: {name ? name : "Guest"}
+            </NavLink>
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
